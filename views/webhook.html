@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment test</title>
+</head>
+<body>
+    <button id="billingKeyBtn">
+        빌링키 생성
+    </button>
+    <textarea name="billingKey" id="billingKey" cols="100" style="display:block; height: 300px;">
+
+    </textarea>
+    <button id="authBtn">
+        권한 토큰 발행
+    </button>
+    <textarea name="authResult" id="authResult" cols="100" style="display:block; height: 300px;">
+
+    </textarea>
+    <button id="paymentBtn">
+        생성된 빌링키를 이용해 결재
+    </button>
+    <textarea name="payment" id="payment" cols="100" style="display:block; height: 300px;">
+
+    </textarea>
+    <button id="scheduleBtn">
+        결제 예약
+    </button>
+    <textarea name="schedule" id="schedule" cols="100" style="display:block; height: 300px;">
+
+    </textarea>
+    <input type="text" name="scheduleCancel" id="scheduleCancel" />
+    <button id="scheduleCancelBtn">
+        예약 결제 취소
+    </button>
+    <textarea name="scheduleCancelResult" cols="100" id="scheduleCancelResult" style="display:block; height: 300px;">
+
+    </textarea>
+    <input type="text" name="searchBtnText"  id="searchBtnText" />
+    <button id="searchBtn">
+        예약 결제 조회
+    </button>
+    <textarea name="searchBtnResult" id="searchBtnResult" cols="100" style="display:block; height: 300px;" >
+
+    </textarea>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+
+        window.onload = () =>{
+            console.log('DOMLoading end');
+            $('#billingKeyBtn').on('click', () =>{ testBillingKey()});
+            $('#paymentBtn').on('click', () =>{ payment()});
+            $('#scheduleBtn').on('click', () =>{ schedule()});
+            $('#scheduleCancelBtn').on('click', () =>{ scheduleCancel()});
+            $('#searchBtn').on('click', () =>{ search()});
+            $('#authBtn').on('click', () =>{ auth()});
+        }
+
+        const testBillingKey = () =>{
+            const IMP = window.IMP;
+            console.log(IMP);
+            //IMP.init('7025204515015486');
+            IMP.init('imp20388061');
+            // 결재 정보 생성 후 import 모듈을 통해 결제 요청 (IMP.request_pay)
+            IMP.request_pay({ // param
+                pg: "html5_inicis",
+                pay_method: "card",
+                merchant_uid: ('billingKey'+new Date().getTime()),
+                name: "import 빌링키 발급",
+                customer_uid: 'handsome001',
+                amount: 0,
+                buyer_email: 'leeseokyeon@letsee.io',
+                buyer_name: 'handsomeLee',
+                buyer_tel: '01089111094',
+                // buyer_addr: "서울시 강남구 테헤란로 82길 15 8층 (주)렛시",
+                // buyer_postcode: "01181"
+            }, async (rsp) => { // callback
+                console.log(rsp);
+                $("#billingKey").val(JSON.stringify(rsp));
+            });
+        }
+
+        const payment = () =>{
+
+        }
+
+        const schedule = () =>{
+
+        }
+
+        const scheduleCancel = () =>{
+
+        }
+
+        const search = () =>{
+
+        }
+
+        const auth = () =>{
+            $.ajax({
+                url: "https://api.iamport.kr/users/getToken",
+                data: {
+                    imp_key: "7495396678046189", // REST API키
+                    imp_secret: "2f6bXTQKnQgLNWpyMpYrANlROHHGLoPODVZBPQmcGCYuzn2lN1NoP8fEPWkBlapZ6oBWeX9Vz7p8vsuj"
+                },
+                method:'post',
+                type:'post',
+                headers:{'Content-Type' : 'application/json'},
+                success : (resp) => {
+                    $('#authResult').val(JSON.stringify(resp));
+                },
+                error : (err,b,c ) => {
+                    $('#authResult').val(JSON.stringify(err)+'\n' +JSON.stringify(b)+'\n' +JSON.stringify(c));
+                }
+            })
+        }
+
+    </script>
+</body>
+</html>
