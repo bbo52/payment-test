@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e707d088-91dc-4a98-b1ce-dd097d475cdc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/config/config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/util.service.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -17,6 +21,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="ProjectId" id="1pEhVIZGoguNc5tG2TlKu4tmQaH" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -27,9 +32,14 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="javascript.nodejs.core.library.configured.version" value="12.19.0" />
-    <property name="javascript.nodejs.core.library.typings.version" value="12.19.0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/views" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="14.15.3" />
+    <property name="javascript.nodejs.core.library.typings.version" value="14.14.25" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -56,6 +66,7 @@
       <workItem from="1614754180139" duration="3701000" />
       <workItem from="1614837066169" duration="6252000" />
       <workItem from="1614851157226" duration="1120000" />
+      <workItem from="1614916858663" duration="727000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <created>1614850529636</created>
@@ -70,22 +81,19 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first" />
     <option name="LAST_COMMIT_MESSAGE" value="first" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="3097" y="9" key="CommitChangelistDialog2" timestamp="1614850526799">
-      <screen x="2560" y="-114" width="1920" height="1080" />
-    </state>
-    <state x="3097" y="9" key="CommitChangelistDialog2/2560.-114.1920.1080/0.0.2560.1440@2560.-114.1920.1080" timestamp="1614850526799" />
-    <state x="3120" y="166" key="Vcs.Push.Dialog.v2" timestamp="1614850535354">
-      <screen x="2560" y="-114" width="1920" height="1080" />
-    </state>
-    <state x="3120" y="166" key="Vcs.Push.Dialog.v2/2560.-114.1920.1080/0.0.2560.1440@2560.-114.1920.1080" timestamp="1614850535354" />
-    <state x="3342" y="327" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1614851191040">
-      <screen x="2560" y="-114" width="1920" height="1080" />
-    </state>
-    <state x="3342" y="327" key="git4idea.remote.GitConfigureRemotesDialog/2560.-114.1920.1080/0.0.2560.1440@2560.-114.1920.1080" timestamp="1614851191040" />
   </component>
 </project>
