@@ -17,8 +17,15 @@
     <textarea name="authResult" id="authResult" cols="100" style="display:block; height: 300px;">
 
     </textarea>
-    <form name="paymentForm">
-
+    <form name="paymentForm" id="paymentForm">
+        <label >
+            accessToken :
+        </label>
+        <input type="text" name="accessToken" />
+        <label >
+            customer_uid :
+        </label>
+        <input type="text" name="customer_uid" />
     </form>
     <button id="paymentBtn">
         생성된 빌링키를 이용해 결재
@@ -26,8 +33,23 @@
     <textarea name="paymentResult" id="paymentResult" cols="100" style="display:block; height: 300px;">
 
     </textarea>
-    <form name="scheduleForm">
-
+    <form name="scheduleForm" id="scheduleForm">
+        <label >
+            accessToken :
+        </label>
+        <input type="text" name="accessToken" />
+        <label for="imp_uid">
+            imp_uid :
+        </label>
+        <input type="text" name="imp_uid" id="imp_uid" />
+        <label for="merchant_uid">
+            merchant_uid :
+        </label>
+        <input type="text" name="merchant_uid" id="merchant_uid" />
+        <label for="imp_uid">
+            schedule_at :
+        </label>
+        <input type="text" name="schedule_at" id="schedule_at" placeholder="MM/DD/YYYY hh:MM" />
     </form>
     <button id="scheduleBtn">
         결제 예약
@@ -36,7 +58,14 @@
 
     </textarea>
     <form name="scheduleCancelForm">
-        <input type="text" name="scheduleCancel" id="scheduleCancel" />
+        <label >
+            accessToken :
+        </label>
+        <input type="text" name="accessToken" />
+        <label >
+            Cancel merchant_uid :
+        </label>
+        <input type="text" name="merchant_uid"  />
     </form>
     <button id="scheduleCancelBtn">
         예약 결제 취소
@@ -45,7 +74,14 @@
 
     </textarea>
     <form name="searchForm">
-        <input type="text" name="searchBtnText"  id="searchBtnText" />
+        <label >
+            customer_uid :
+        </label>
+        <input type="text" name="customer_uid"  />
+        <label >
+            merchant_uid :
+        </label>
+        <input type="text" name="merchant_uid"  />
     </form>
     <button id="searchBtn">
         예약 결제 조회
@@ -94,14 +130,14 @@
 
         const payment = () =>{
             const url = "/again";
-            const data = {};
+            const data = $('#paymentForm').serializeObject();
             const el = $('#paymentResult');
             commonAjax(url , el , data);
         }
 
         const schedule = () =>{
             const url = "/schedule";
-            const data = {};
+            const data = $('#scheduleForm').serializeObject();
             const el = $('#scheduleResult');
             commonAjax(url , el , data);
         }
@@ -127,11 +163,12 @@
             commonAjax(url , el , data);
         }
 
-        const commonAjax = (url , data, el) =>{
+        const commonAjax = (url , el, data) =>{
             $.ajax({
                 url: url,
                 method:'post',
-                data: data,
+                data: JSON.stringify(data),
+                dataType:'json',
                 type:'post',
                 headers:{'Content-Type' : 'application/json'},
                 success : (resp) => {
@@ -143,6 +180,21 @@
             })
         }
 
+        jQuery.fn.serializeObject = function() {
+            var obj = null;
+            try {
+                if(this[0].tagName && this[0].tagName.toUpperCase() == "FORM" ) {
+                    var arr = this.serializeArray();
+                    if(arr){ obj = {};
+                        jQuery.each(arr, function() {
+                            obj[this.name] = this.value; });
+                    }
+                }
+            }catch(e) {
+                alert(e.message);
+            }finally {}
+            return obj;
+        }
     </script>
 </body>
 </html>
