@@ -143,7 +143,7 @@ router.post('/schedule', async function(req, res, next){
 
 /** 예약 결제 취소 */
 
-router.post('//scheduleCancel', async function(req, res, next){
+router.post('/scheduleCancel', async function(req, res, next){
   try{
     const { imp_uid, merchant_uid } = req.body;
 
