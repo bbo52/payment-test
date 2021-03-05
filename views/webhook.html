@@ -17,26 +17,36 @@
     <textarea name="authResult" id="authResult" cols="100" style="display:block; height: 300px;">
 
     </textarea>
+    <form name="paymentForm">
+
+    </form>
     <button id="paymentBtn">
         생성된 빌링키를 이용해 결재
     </button>
-    <textarea name="payment" id="payment" cols="100" style="display:block; height: 300px;">
+    <textarea name="paymentResult" id="paymentResult" cols="100" style="display:block; height: 300px;">
 
     </textarea>
+    <form name="scheduleForm">
+
+    </form>
     <button id="scheduleBtn">
         결제 예약
     </button>
-    <textarea name="schedule" id="schedule" cols="100" style="display:block; height: 300px;">
+    <textarea name="scheduleResult" id="scheduleResult" cols="100" style="display:block; height: 300px;">
 
     </textarea>
-    <input type="text" name="scheduleCancel" id="scheduleCancel" />
+    <form name="scheduleCancelForm">
+        <input type="text" name="scheduleCancel" id="scheduleCancel" />
+    </form>
     <button id="scheduleCancelBtn">
         예약 결제 취소
     </button>
     <textarea name="scheduleCancelResult" cols="100" id="scheduleCancelResult" style="display:block; height: 300px;">
 
     </textarea>
-    <input type="text" name="searchBtnText"  id="searchBtnText" />
+    <form name="searchForm">
+        <input type="text" name="searchBtnText"  id="searchBtnText" />
+    </form>
     <button id="searchBtn">
         예약 결제 조회
     </button>
@@ -83,36 +93,52 @@
         }
 
         const payment = () =>{
-
+            const url = "/again";
+            const data = {};
+            const el = $('#paymentResult');
+            commonAjax(url , el , data);
         }
 
         const schedule = () =>{
-
+            const url = "/schedule";
+            const data = {};
+            const el = $('#scheduleResult');
+            commonAjax(url , el , data);
         }
 
         const scheduleCancel = () =>{
-
+            const url = "/scheduleCancel";
+            const data = {};
+            const el = $('#scheduleCancelResult');
+            commonAjax(url , el , data);
         }
 
         const search = () =>{
-
+            const url = "/search";
+            const data = {};
+            const el = $('#searchBtnResult');
+            commonAjax(url , el , data);
         }
 
         const auth = () =>{
+            const url = "/getToken";
+            const data = {};
+            const el = $('#authResult');
+            commonAjax(url , el , data);
+        }
+
+        const commonAjax = (url , data, el) =>{
             $.ajax({
-                url: "https://api.iamport.kr/users/getToken",
-                data: {
-                    imp_key: "7495396678046189", // REST API키
-                    imp_secret: "2f6bXTQKnQgLNWpyMpYrANlROHHGLoPODVZBPQmcGCYuzn2lN1NoP8fEPWkBlapZ6oBWeX9Vz7p8vsuj"
-                },
+                url: url,
                 method:'post',
+                data: data,
                 type:'post',
                 headers:{'Content-Type' : 'application/json'},
                 success : (resp) => {
-                    $('#authResult').val(JSON.stringify(resp));
+                    $(el).val(JSON.stringify(resp));
                 },
                 error : (err,b,c ) => {
-                    $('#authResult').val(JSON.stringify(err)+'\n' +JSON.stringify(b)+'\n' +JSON.stringify(c));
+                    $(el).val(JSON.stringify(err)+'\n' +JSON.stringify(b)+'\n' +JSON.stringify(c));
                 }
             })
         }
