@@ -103,6 +103,7 @@ router.post('/schedule', async function(req, res, next){
   const {status} = paymentData;
   const {schedule_at} = req.body;
   if(status === 'paid'){
+    const merchant_uid = 'merchant_'+ new Date().getTime();
     axios({
       url:'https://api.iamport.kr/subscribe/payments/schedule',
       method:'post',
@@ -110,7 +111,7 @@ router.post('/schedule', async function(req, res, next){
       data: {
         customer_uid:"donghyun_0304",
         schedules:[{
-          merchant_uid:'merchant_'+ new Date().getTime(),
+          merchant_uid:merchant_uid,
           schedule_at: moment(schedule_at, "M/D/YYYY H:mm").unix(),
           //schedule_at:시간설정,
           amount: 10,
@@ -184,7 +185,39 @@ router.post('/scheduleCancel', async function(req, res, next){
 /** 예약 결제 조회 */
 
 router.get('/search', async function(req, res, next){
+  const { merchant_uid } = req.body;
 
+  let getToken; let err;
+  [err, getToken] = await to(axios({
+    url:'https://api.iamport.kr/users/getToken',
+    method:'post',
+    headers:{'Content-Type': 'application/json'},
+    data:{
+      imp_key: CONFIG.imp_apiKey,
+      imp_secret: CONFIG.imp_secretKey,
+    },
+  }));
+  if(err) return ReE(res, err);
 
+  const { access_token } = getToken.data.respond;
+
+  let getPaymentData;
+
+  [err, getPaymentData] = await to(axios({
+    url:'https://api.iamport.kr/subscribe/payments/schedule/'+ merchant_uid,
+    method:'get',
+    headers:{'Authorization': access_token},
+  }));
+  if(err) return ReE(res, err);
+
+  const paymentData = getPaymentData.data.response;
+
+  const {schedule_status} = paymentData;
+  if(schedule_status === 'scheduled'){
+    const result = paymentData;
+    return ReS(res, paymentData);
+  } else {
+    return res.status(404).send(err);
+  }
 });
 module.exports = router;
